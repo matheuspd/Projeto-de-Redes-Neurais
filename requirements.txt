@@ -1,0 +1,12 @@
+joblib
+numpy
+torch
+umap-learn
+pandas
+seaborn
+colorcet
+matplotlib
+scikit-learn
+sentence-transformers
+pillow
+nltk
