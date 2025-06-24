@@ -195,9 +195,5 @@ cython_debug/
 
 # Project data
 flickr30k-images/
-model_sentence_transformer/
-descricao_clusters.csv
-embeddings_labels.npz
-model_kmeans.joblib
-model_pca.joblib
-clusters_visualizacao.png
+models/
+plots/

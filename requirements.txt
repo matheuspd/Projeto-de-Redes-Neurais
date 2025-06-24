@@ -10,3 +10,4 @@ scikit-learn
 sentence-transformers
 pillow
 nltk
+openTSNE
