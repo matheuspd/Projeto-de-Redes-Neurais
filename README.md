@@ -3,11 +3,11 @@ Projeto para a disciplina de redes neurais. Utilização de modelos de classific
 
 # Autores
 
-Matheus Pereira Dias
-Marcus Vinicius da Silva
-Rafael Cunha Bejes Learth
-Vitor Augusto Paiva de Brito
-Mateus Santos Messias
+* Matheus Pereira Dias
+* Marcus Vinicius da Silva
+* Rafael Cunha Bejes Learth
+* Vitor Augusto Paiva de Brito
+* Mateus Santos Messias
 
 # Configuração do Ambiente
 
