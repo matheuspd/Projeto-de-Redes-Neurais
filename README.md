@@ -1,5 +1,13 @@
-# Projeto-de-Redes-Neurais
+# Projeto de Redes Neurais
 Projeto para a disciplina de redes neurais. Utilização de modelos de classificação e agrupamento de imagens e texto descritivo para análise e recuperação de conteúdo.
+
+# Autores
+
+Matheus Pereira Dias
+Marcus Vinicius da Silva
+Rafael Cunha Bejes Learth
+Vitor Augusto Paiva de Brito
+Mateus Santos Messias
 
 # Configuração do Ambiente
 
