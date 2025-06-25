@@ -36,6 +36,7 @@ from sklearn.preprocessing import normalize
 from sentence_transformers import SentenceTransformer
 import hdbscan
 from sklearn.utils import resample
+from sklearn.preprocessing import StandardScaler
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 warnings.filterwarnings("ignore", category=FutureWarning)
@@ -80,6 +81,13 @@ print("Normalizando embeddings...")
 embeddings = normalize(embeddings, norm='l2')
 
 # ===================== Redução de Dimensionalidade com PCA =====================
+
+# Normalização para PCA
+scaler = StandardScaler()
+embeddings = scaler.fit_transform(embeddings)
+
+joblib.dump(scaler, '../models/model_scaler.joblib')
+
 print("Reduzindo dimensionalidade...")
 pca = PCA(n_components=embeddings.shape[1]//3, random_state=1337)
 embeddings_reduced = pca.fit_transform(embeddings)

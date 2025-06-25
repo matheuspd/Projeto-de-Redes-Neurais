@@ -16,6 +16,7 @@ MODELS_DIR = "../models"
 # Carregamento de dados e modelos
 print("Carregando modelos e dados...")
 model = SentenceTransformer(f"{MODELS_DIR}/model_sentence_transformer")
+scaler = joblib.load(f"{MODELS_DIR}/model_scaler.joblib")
 pca = joblib.load(f"{MODELS_DIR}/model_pca.joblib")
 pca_hdbscan = joblib.load(f"{MODELS_DIR}/model_pca_hdbscan.joblib")
 df = pd.read_csv(f"{MODELS_DIR}/descricao_clusters.csv")
@@ -56,7 +57,9 @@ def classificar_descricao(texto, modelo_nome):
     # Determina o cluster
     if modelo_nome.startswith("kmeans"):
         emb = model.encode([texto], show_progress_bar=True, convert_to_numpy=True)
-        emb_pca = pca.transform(normalize(emb, norm='l2'))
+        emb = normalize(emb, norm='l2')
+        emb = scaler.transform(emb)
+        emb_pca = pca.transform(emb)
         cluster_id = kmeans_models[modelo_nome].predict(emb_pca)[0]
 
         col_cluster = f"{modelo_nome}_label"
@@ -68,6 +71,7 @@ def classificar_descricao(texto, modelo_nome):
     
         descs = cluster_df['description'].tolist()
         embs = normalize(model.encode(descs, show_progress_bar=True, convert_to_numpy=True), norm='l2')
+        embs = scaler.transform(embs)
         embs_pca = pca.transform(embs)
         sims = cosine_similarity(emb_pca, embs_pca)[0]
         idx = np.argmax(sims)
@@ -76,7 +80,9 @@ def classificar_descricao(texto, modelo_nome):
     
     elif modelo_nome == "hdbscan":
         emb = model.encode([texto], show_progress_bar=True, convert_to_numpy=True)
-        emb_pca = pca_hdbscan.transform(normalize(emb, norm='l2'))
+        emb = normalize(emb, norm='l2')
+        emb = scaler.transform(emb)
+        emb_pca = pca_hdbscan.transform(emb)
         cluster_id, _ = approximate_predict(hdbscan_model, emb_pca)
         cluster_id = cluster_id[0]
         if cluster_id == -1:
@@ -95,6 +101,7 @@ def classificar_descricao(texto, modelo_nome):
         # Buscar a descrição mais similar dentro do cluster
         descs = cluster_df['description'].tolist()
         embs = normalize(model.encode(descs, show_progress_bar=True, convert_to_numpy=True), norm='l2')
+        embs = scaler.transform(embs)
         embs_pca = pca_hdbscan.transform(embs)
         sims = cosine_similarity(emb_pca, embs_pca)[0]
         idx = np.argmax(sims)

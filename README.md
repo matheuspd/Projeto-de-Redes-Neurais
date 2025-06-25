@@ -68,6 +68,7 @@ python create_model.py
   - `models/hdbscan.joblib`
   - `models/model_pca.joblib`
   - `models/model_pca_hdbscan.joblib`
+  - `models/model_scaler.joblib`
   - `models/model_sentence_transformer/`
   - `models/embeddings_pca.npz`
   - `models/embeddings_hdbscan.npz`
