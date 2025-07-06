@@ -70,7 +70,7 @@ for nome_modelo, (col_label, X_full) in modelos.items():
 print("[INFO] Avaliação completa.")
 
 """
-Explciar resultados:
+Explicar resultados:
 
 Avaliando: clip_kmeans_150     
   Clusters válidos: 150
