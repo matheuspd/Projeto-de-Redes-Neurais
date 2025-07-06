@@ -198,7 +198,7 @@ flickr30k-images/
 models/
 plots/
 # Ignora tudo dentro de clip_outputs
-clip_outputs/**
+clip_outputs/
 # Mas não ignorar a pasta checkpoints inteira (para poder negar um arquivo dentro dela)
 !clip_outputs/checkpoints/
 # E também não ignorar o arquivo clip_embeddings_final.npz dentro da pasta checkpoints
