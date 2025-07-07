@@ -161,10 +161,11 @@ python create_model.py
 - Concatena as 5 descrições de cada imagem em uma única string para melhor representação.
 - Extrai embeddings de imagem e texto simultaneamente usando CLIP.
 - Implementa sistema de checkpoints automáticos a cada 1024 imagens processadas para robustez.
-- Aplica PCA para redução de dimensionalidade nos embeddings combinados (imagem + texto).
-- Realiza clustering com KMeans (150 clusters) e HDBSCAN em uma amostra reduzida.
+- Aplica PCA para redução de dimensionalidade nos embeddings combinados (imagem + texto), um PCA para o KMeans e outro para o HDBSCAN (maior redução para rodar mais rápido).
+- Realiza clustering com KMeans (150 clusters) e HDBSCAN.
 - Gera visualizações t-SNE dos clusters para análise visual.
 - **Arquivos gerados no diretório "Parte 2":**
+  - `clip_outputs/checkpoints/clip_embeddings_part_{X}.npz`: a cada 1024 batches (continuação de onde parou caso não tenha finalizado).
   - `clip_outputs/checkpoints/clip_embeddings_final.npz`
   - `clip_outputs/clip_train_filenames.csv`
   - `clip_outputs/clip_scaler.joblib`
@@ -183,7 +184,7 @@ python evaluate_clusters.py
 ```
 
 **O que faz:**
-- Avalia a qualidade dos clusters CLIP usando métricas padrão de clustering.
+- Avalia a qualidade dos clusters CLIP usando métricas padrão de clustering (as mesmas da Parte 1).
 - Compara desempenho entre KMeans e HDBSCAN em embeddings multimodais.
 - Calcula três métricas principais:
   - **Silhouette Score:** Mede coesão e separação dos clusters (valores maiores são melhores).
@@ -213,22 +214,21 @@ python recover_images_from_text.py
 ```
 
 **O que faz:**
-- Implementa interface interativa para busca de imagens por descrição textual.
+- Implementa busca de imagens por descrição textual.
 - Solicita entrada de texto do usuário para consulta.
 - Gera embedding CLIP da consulta textual usando o mesmo modelo treinado.
 - Aplica as transformações necessárias (scaler, PCA) para compatibilidade.
 - Calcula similaridade de cosseno entre o texto de consulta e todos os embeddings de treino.
 - Encontra e exibe as top-3 imagens mais similares no dataset de treino.
 - Mostra scores de similaridade para cada resultado retornado.
-- Demonstra a capacidade de busca texto → imagem do modelo CLIP multimodal.
-- Permite consultas iterativas até que o usuário escolha sair.
+- Demonstra a capacidade de busca texto => imagem do modelo CLIP multimodal.
 
 ### 5. Comparação entre Modelos
 
 A Parte 2 oferece vantagens significativas sobre a Parte 1:
 
 - **Modalidade:** Multimodal (imagem + texto) vs apenas texto
-- **Busca:** Permite busca texto → imagem além de agrupamento
+- **Busca:** Permite busca texto => imagem além de agrupamento (também feito na Parte 1, porém sem considerar as imagens)
 - **Robustez:** Sistema de checkpoints para processos longos
 - **Validação:** Separação clara entre dados de treino e teste
 - **Similaridade:** Busca baseada em similaridade semântica mais rica
