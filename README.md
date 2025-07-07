@@ -42,7 +42,7 @@ source venv/bin/activate
 Análise apenas textual.
 
 ```bash
-cd Parte 1/src
+cd 'Parte 1/src'
 ```
 
 ### 1. Criar o Modelo (`create_model.py`)
