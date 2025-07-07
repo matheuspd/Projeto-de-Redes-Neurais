@@ -41,6 +41,10 @@ from sklearn.preprocessing import StandardScaler
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 warnings.filterwarnings("ignore", category=FutureWarning)
 
+# ===================== Criar pastas para salvar arquivos =====================
+os.makedirs("../models", exist_ok=True)
+os.makedirs("../plots", exist_ok=True)
+
 # ===================== Carregamento do Dataset =====================
 print("Carregando Dataset...")
 
@@ -91,10 +95,6 @@ joblib.dump(scaler, '../models/model_scaler.joblib')
 print("Reduzindo dimensionalidade...")
 pca = PCA(n_components=embeddings.shape[1]//3, random_state=1337)
 embeddings_reduced = pca.fit_transform(embeddings)
-
-# ===================== Criar pastas para salvar arquivos =====================
-os.makedirs("../models", exist_ok=True)
-os.makedirs("../plots", exist_ok=True)
 
 # ===================== Função auxiliar para visualização =====================
 def plot_and_save(embeddings_2d, labels, method_name, model_name, desc_subset):
