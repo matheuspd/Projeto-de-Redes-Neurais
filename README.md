@@ -165,7 +165,7 @@ python create_model.py
 - Realiza clustering com KMeans (150 clusters) e HDBSCAN.
 - Gera visualizações t-SNE dos clusters para análise visual.
 - **Arquivos gerados no diretório "Parte 2":**
-  - `clip_outputs/checkpoints/clip_embeddings_part_{X}.npz`: a cada 1024 batches (continuação de onde parou caso não tenha finalizado).
+  - `clip_outputs/checkpoints/clip_embeddings_part_{X}.npz`: novo arquivo a cada 1024 imagens processadas (continuação de onde parou caso não tenha finalizado).
   - `clip_outputs/checkpoints/clip_embeddings_final.npz`
   - `clip_outputs/clip_train_filenames.csv`
   - `clip_outputs/clip_scaler.joblib`
